@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <button class="highScores">View Highscores</button>
+      <button class="highscore">View Highscores</button>
       <div class="timer"></div>
     </header>
     <main>
@@ -40,7 +40,7 @@
           <button class="button"></button>
         </p>
       </div>
-      <div class="enter-initials" style="display: none">
+      <div class="enterInitials" style="display: none">
         <h2>This round is complete!</h2>
         <p></p>
         <label for="initial">Enter initials below:</label>
@@ -48,19 +48,19 @@
           type="text"
           name="initial"
           maxlength="5"
-          id="initial-input"
+          id="initialInput"
           placeholder="Your Initials"
           onkeyup="this.value = this.value.toUpperCase();"
           style="text-transform: uppercase"
         />
-        <button type="submit" id="submit-button">Submit</button>
+        <button type="submit" id="submit">Submit</button>
         <p id="warning"></p>
       </div>
-      <div class="displayAnswers" style="display: none">
+      <div class="displayAnswers">
         <hr />
         <h3></h3>
       </div>
-      <div class="highscore" style="display: none">
+      <div class="highscore">
         <h2>Highscores</h2>
         <ul class="highscoreList"></ul>
         <button id="returnHome">Return</button>
