@@ -53,3 +53,17 @@ var questions = [
     ]
   },
   ];
+
+  // Place questions in array to show up on page
+var questionDisplay = [ 1, 2, 3];
+
+// Loading questions and options
+function generateQuestion() {
+    questions.children[0].textContent = questionDisplay[i].question;
+    questions.children[1].children[0].textContent =
+    questionDisplay[i].option["Hyper Text Markup Language"];
+    questions.children[2].children[0].textContent =
+    questionDisplay[i].option["Star Wars"];
+    questions.children[3].children[0].textContent =
+    questionDisplay[i].option["All of the above"];
+  }
