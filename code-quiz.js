@@ -92,3 +92,11 @@ function generateQuestion() {
       }
     });
   }
+  // Reveal correct answer
+function displayAnswers() {
+    var answerInterval = setInterval(function () {
+      clearInterval(answerInterval);
+      displayAnswers.children[1].textContent = "";
+      displayAnswers.style.display = "none";
+    });
+  }
