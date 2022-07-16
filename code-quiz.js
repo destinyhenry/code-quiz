@@ -53,6 +53,32 @@ var questions = [
     ]
   },
   ];
+  // FUNCTIONS
+// Once begin is pressed, timer also begins
+function beginQuiz() {
+    var timeInterval = setInterval(function () {
+      timeLeft--;
+      timeEl.textContent = timeLeft + "s left";
+      if (timeLeft < 0 || i === questionDisplay.length) {
+        clearInterval(timeInterval);
+        timeEl.textContent = "";
+        InputYourName();
+      }
+    }, 1000);
+    highscore.style.display = "none";
+    homepage.style.display = "none";
+    questionDisplay.style.display = "";
+    quizQuestions();
+  }
+  // Check answers once questions are complete
+  function quizQuestions() {
+    if (i < questionDisplay.length) {
+      generateQuestion();
+      checkAnswer();
+    } else {
+      return;
+    }
+  }
 
   // Place questions in array to show up on page
 var questionDisplay = [ 1, 2, 3];
@@ -78,8 +104,8 @@ function generateQuestion() {
         i++;
         quizQuestions();
         displayAnswers.style.display = "";
-        displayAnswers.children[1].textContent = "Correct!";
-        displayAnswers();
+        displayAnswers.children[1].textContent = "Correct Answer!";
+        quizQuestions();
       } else if (
         event.target.matches("button") &&
         questionDisplay[i].correctAnswer !== event.target.textContent
@@ -87,7 +113,7 @@ function generateQuestion() {
         i++;
         quizQuestions();
         displayAnswers.style.display = "";
-        displayAnswers.children[1].textContent = "Wrong!";
+        displayAnswers.children[1].textContent = "Incorrect Anwswer!";
         displayAnswers();
       }
     });
@@ -100,3 +126,7 @@ function displayAnswers() {
       displayAnswers.style.display = "none";
     });
   }
+
+  // USER INTERACTION
+
+begin.addEventListener("click", beginQuiz);
