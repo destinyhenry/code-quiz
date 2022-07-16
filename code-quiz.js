@@ -67,3 +67,28 @@ function generateQuestion() {
     questions.children[3].children[0].textContent =
     questionDisplay[i].option["All of the above"];
   }
+  // Check if answer is correct
+    function checkAnswer() {
+    questions.addEventListener("click", function (event) {
+      event.stopImmediatePropagation();
+      if (
+        event.target.matches("button") &&
+        questionDisplay[i].correctAnswer === event.target.textContent
+      ) {
+        i++;
+        quizQuestions();
+        displayAnswers.style.display = "";
+        displayAnswers.children[1].textContent = "Correct!";
+        displayAnswers();
+      } else if (
+        event.target.matches("button") &&
+        questionDisplay[i].correctAnswer !== event.target.textContent
+      ) {
+        i++;
+        quizQuestions();
+        displayAnswers.style.display = "";
+        displayAnswers.children[1].textContent = "Wrong!";
+        displayAnswers();
+      }
+    });
+  }
