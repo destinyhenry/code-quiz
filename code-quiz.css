@@ -1,1 +1,32 @@
 
+body {
+    text-align: center;
+    color: lawngreen;
+    font-family: monospace;
+    background-color: rgb(0, 0, 0);
+}
+
+button {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 30px;
+    background-color: white;
+}
+
+h3 {
+    text-align: center;
+    color: red;
+}
+
+.questionBox button {
+    justify-content: center;
+    display: flex block;
+    margin: 10px;
+    text-align: center;
+    color: lawngreen;
+    font-family: monospace;
+    color: white;
+}
+#timerEl{
+    size: 15px
+}

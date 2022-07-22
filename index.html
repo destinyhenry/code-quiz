@@ -1,32 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" />
-    <link rel="stylesheet" href="" />
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="code-quiz.css">
     <title>Code Quiz</title>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <button class="highscore">View Highscores</button>
-      <div class="timer"></div>
+        <button class="viewScores id="viewScores">View high score</button>
     </header>
-    <main>
-      <div class="homepage">
-        <h1>Coding Quiz Challenge</h1>
-        <p>
-          Test your Coding knowledge! You have 30 seconds to answer each question. 
-        </p>
-          <p>Beware of haste! Wrong answers come with a penalty. </p>
-        
-        <button class="begin">Begin</button>
-      </div>
-
-      <div class="questions" style="display: none">
-        
+    <div class="timer"></div>
+    <div id="homepage">
+    <h1>Coding Quiz Challenge</h1>
+    <h2>Test your Coding knowledge! You have 30 seconds to answer each question.</h2>
+    <h3>Beware of haste! Wrong answers come with a penalty.</h3>
+    <button id="beginQuiz">Begin Quiz</button>
+    </div>
+    <h2 id="timerEl"></h2>
+    <div class="questionBox" id="questionBox"></div>
+    <div class="quizQuestion" style="display: none">
+        <h2></h2>
         <p>
           <button class="button"></button>
         </p>
@@ -40,33 +36,31 @@
           <button class="button"></button>
         </p>
       </div>
-      <div class="enterInitials" style="display: none">
-        <h2>This round is complete!</h2>
+      <div class="enter-initials" style="display: none">
+        <h2>The quiz has ended!</h2>
         <p></p>
-        <label for="initial">Enter initials below:</label>
+        <label for="initial">Enter initials here:</label>
         <input
           type="text"
           name="initial"
           maxlength="5"
-          id="initialInput"
-          placeholder="Your Initials"
+          id="initial-input"
+          placeholder="Your Initial"
           onkeyup="this.value = this.value.toUpperCase();"
           style="text-transform: uppercase"
         />
-        <button type="submit" id="submit">Submit</button>
+        <button type="submit" id="submitInitials">Submit</button>
         <p id="warning"></p>
       </div>
-      <div class="displayAnswers" id="answer">
-        <hr />
-        <h3></h3>
+    <div id="checkAnswer"></div>
+    <h3></h3>
       </div>
-      <div class="highscore">
+      <div class="highscore" style="display: none">
         <h2>Highscores</h2>
         <ul class="highscoreList"></ul>
-        <button id="returnHome">Return</button>
+        <button id="returnHome">Go Back</button>
         <button id="clearHighscore">Clear Highscores</button>
       </div>
-    </main>
-    <script src="/code-quiz/code-quiz.js"></script>
-  </body>
+    <script src="code-quiz.js"></script>
+</body>
 </html>
