@@ -20,7 +20,7 @@ var timeRemaining = 60;
 var i = 0;
 var scoreHistory = [];
 
-var question1 = {
+question1 = {
     question: "1. What does HTML stand for?",
     options: [
     "1 - Hyper Text Preprocessor", 
@@ -54,12 +54,8 @@ var question1 = {
     correctAnswer: "4 - All of the above",
   };
  
-  // Put questions into array
-  var questionDisplay = [
-    question1,
-    question2,
-    question3,
-  ];
+//   Put questions into array
+  var questionDisplay = [question1, question2, question3,];
   
     // once begin button is pressed, the timer is triggered as well
     function beginQuiz() {
@@ -72,8 +68,44 @@ var question1 = {
             NameInput();
           }
         }, 1000);
-        highScoreBox.style.display = "none";
+        highscoreBox.style.display = "none";
         homepage.style.display = "none";
         questionBox.style.display = "";
         questions();
       }
+    //   allow questions to show up on the page
+    function questions() {
+        if (i < questionDisplay.length) {
+          generateQuestion();
+          checkIfCorrect();
+        } else {
+          return;
+        }
+      }
+      // Loading questions and options
+      function generateQuestion() {
+       questionBox.children[0].textContent = questionDisplay[i].question;
+       questionBox.children[1].children[0].textContent =
+          questionDisplay[i].options[0];
+          questionBox.children[2].children[0].textContent =
+          questionDisplay[i].options[1];
+          questionBox.children[3].children[0].textContent =
+          questionDisplay[i].options[2];
+          questionBox.children[4].children[0].textContent =
+          questionDisplay[i].options[3];
+      }
+
+    //   function renderQuestion() {
+
+    //     let show = document.getElementById('question');
+    //     let q = myQuestions[questionIndex];
+      
+    //     show.innerHTML = q.question;
+    //     questionIndex++;
+    //     console.log(questionIndex)
+      
+    //     button1.innerHTML = q.answers.a;
+    //     button2.innerHTML = q.answers.b;
+    //     button3.innerHTML = q.answers.c;
+    //     button4.innerHTML = q.answers.d;
+    //   }
