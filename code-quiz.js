@@ -110,13 +110,35 @@ question1 = {
                 alert("Too bad!");
             }
         });
+        // After running out questions or running out of time, input user score, put into localstorage
+    function submitInitials() {
+        var storedValue = JSON.parse(localStorage.getItem("history"));
+        if (storedValue !== null) {
+        scoreHistoryArray = storedValue;
+        }
+        questionBox.style.display = "none";
+        highscoreBox.style.display = "none";
+        enterInitials.style.display = "";
+        enterInitials.children[1].textContent = "Your final score is " + timeLeft;
+        submitInitials.addEventListener("click", function (event) {
+        event.stopImmediatePropagation();
+        var userInitials = document.querySelector("#input-initial").value.trim();
+        if (userInitials === "") {
+        return;
+        }
+        var unit = userInitials + "==" + timeLeft;
+        scoreHistory.push(unit);
+        userInitials.value = "";
+        localStorage.setItem("history", JSON.stringify(scoreHistory));
+        highscore();
+    });
+  }
     }
+
 
 // add event listeners 
 beginQuiz.addEventListener("click", beginQuiz);
-
+returnHome.addEventListener("click", returnHome);
 viewScores.addEventListener("click", viewScores);
-
 clearHistory.addEventListener("click", clearLocalStorage);
 
-returnHome.addEventListener("click", returnHome);
