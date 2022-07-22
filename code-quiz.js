@@ -95,17 +95,28 @@ question1 = {
           questionDisplay[i].options[3];
       }
 
-    //   function renderQuestion() {
+      function checkAnswers(correctAnswers) {
 
-    //     let show = document.getElementById('question');
-    //     let q = myQuestions[questionIndex];
-      
-    //     show.innerHTML = q.question;
-    //     questionIndex++;
-    //     console.log(questionIndex)
-      
-    //     button1.innerHTML = q.answers.a;
-    //     button2.innerHTML = q.answers.b;
-    //     button3.innerHTML = q.answers.c;
-    //     button4.innerHTML = q.answers.d;
-    //   }
+        //You could also just use a standard for-loop for this
+        correctAnswers.forEach(function(correctAnswer, i) {
+            //Note unless you check prevent i from being appended when i == 1,
+            // your first answer ID will be "answer1" instead of "answer"
+            var answer = document.getElementById("correctAnswer" + (i + 1)).value;
+    
+            if (answerIsCorrect(answer, correctAnswer)) {
+                alert("Well done!");
+    
+            } else {
+                alert("Too bad!");
+            }
+        });
+    }
+
+// add event listeners 
+beginQuiz.addEventListener("click", beginQuiz);
+
+viewScores.addEventListener("click", viewScores);
+
+clearHistory.addEventListener("click", clearLocalStorage);
+
+returnHome.addEventListener("click", returnHome);
