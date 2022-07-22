@@ -54,11 +54,26 @@ var question1 = {
     correctAnswer: "4 - All of the above",
   };
  
-  // Put questions into an Array
+  // Put questions into array
   var questionDisplay = [
     question1,
     question2,
     question3,
   ];
   
-  
+    // once begin button is pressed, the timer is triggered as well
+    function beginQuiz() {
+        var timeInterval = setInterval(function () {
+          timeLeft--;
+          timerEl.textContent = timeLeft + "s left";
+          if (timeLeft < 0 || i === questionDisplay.length) {
+            clearInterval(timeInterval);
+            timerEl.textContent = "";
+            NameInput();
+          }
+        }, 1000);
+        highScoreBox.style.display = "none";
+        homepage.style.display = "none";
+        questionBox.style.display = "";
+        questions();
+      }
