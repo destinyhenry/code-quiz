@@ -10,18 +10,18 @@
 </head>
 <body>
     <header>
-        <button class="viewScores id="viewScores">View high score</button>
+        <button class="viewScores" id="viewScores" >View high score</button>
     </header>
     <div class="timer"></div>
-    <div id="homepage">
+    <div id="homepage" class="homepage">
     <h1>Coding Quiz Challenge</h1>
     <h2>Test your Coding knowledge! You have 30 seconds to answer each question.</h2>
     <h3>Beware of haste! Wrong answers come with a penalty.</h3>
-    <button id="beginQuiz">Begin Quiz</button>
+    <button  id="begin" class="beginQuiz">Begin Quiz</button>
     </div>
-    <h2 id="timerEl"></h2>
+    <h2 id="timerEl" class="timerEl"></h2>
     <div class="questionBox" id="questionBox"></div>
-    <div class="quizQuestion" style="display: none">
+    <div class="questions" id="questions" style="display: none">
         <h2></h2>
         <p>
           <button class="button"></button>
@@ -36,7 +36,7 @@
           <button class="button"></button>
         </p>
       </div>
-      <div class="enter-initials" style="display: none">
+      <div class="enterInitials" id="enterInitials"  style="display: none">
         <h2>The quiz has ended!</h2>
         <p></p>
         <label for="initial">Enter initials here:</label>
@@ -45,21 +45,21 @@
           name="initial"
           maxlength="5"
           id="initial-input"
-          placeholder="Your Initial"
+          placeholder="Enter your initials."
           onkeyup="this.value = this.value.toUpperCase();"
           style="text-transform: uppercase"
         />
-        <button type="submit" id="submitInitials">Submit</button>
+        <button type="submit" id="submitInitials" class="submitInitials">Submit</button>
         <p id="warning"></p>
       </div>
     <div id="checkAnswer"></div>
     <h3></h3>
       </div>
-      <div class="highscore" style="display: none">
+      <div class="highscore" id="highscore" style="display: none">
         <h2>Highscores</h2>
-        <ul class="highscoreList"></ul>
-        <button id="returnHome">Go Back</button>
-        <button id="clearHighscore">Clear Highscores</button>
+        <ul class="highscoreList" id="highscoreList"></ul>
+        <button id="returnHome" class="returnHome">Go Back</button>
+        <button id="clearScores" class="clearScores">Clear Highscores</button>
       </div>
     <script src="code-quiz.js"></script>
 </body>

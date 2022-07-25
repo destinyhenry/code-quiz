@@ -20,7 +20,7 @@ var timeRemaining = 60;
 var i = 0;
 var scoreHistory = [];
 
-question1 = {
+var question1 = {
     question: "1. What does HTML stand for?",
     options: [
     "1 - Hyper Text Preprocessor", 
@@ -65,7 +65,7 @@ question1 = {
           if (timeLeft < 0 || i === questionDisplay.length) {
             clearInterval(timeInterval);
             timerEl.textContent = "";
-            NameInput();
+            nameInput();
           }
         }, 1000);
         highscoreBox.style.display = "none";
@@ -95,23 +95,57 @@ question1 = {
           questionDisplay[i].options[3];
       }
 
-      function checkAnswers(correctAnswers) {
+    //   function checkAnswers(correctAnswers) {
 
-        //You could also just use a standard for-loop for this
-        correctAnswers.forEach(function(correctAnswer, i) {
-            //Note unless you check prevent i from being appended when i == 1,
-            // your first answer ID will be "answer1" instead of "answer"
-            var answer = document.getElementById("correctAnswer" + (i + 1)).value;
+    //     //You could also just use a standard for-loop for this
+    //     correctAnswers.forEach(function(correctAnswer, i) {
+    //         //Note unless you check prevent i from being appended when i == 1,
+    //         // your first answer ID will be "answer1" instead of "answer"
+    //         var answer = document.getElementById("correctAnswer" + (i + 1)).value;
     
-            if (answerIsCorrect(answer, correctAnswer)) {
-                alert("Well done!");
+    //         if (answerIsCorrect(answer, correctAnswer)) {
+    //             alert("Well done!");
     
-            } else {
-                alert("Too bad!");
-            }
-        });
+    //         } else {
+    //             alert("Too bad!");
+    //         }
+        // });
+        // Check if answer is correct
+function checkAnswers() {
+    questionBox.addEventListener("click", function (event) {
+      event.stopImmediatePropagation();
+      if (
+        event.target.matches("button") &&
+        questionDisplay[i].correctAnswer === event.target.textContent
+      ) {
+        i++;
+        questions();
+        checkAnswer.style.display = "";
+        checkAnswer.children[1].textContent = "Correct!";
+        showAnswer();
+      } else if (
+        event.target.matches("button") &&
+        questionDisplay[i].correctAnswer !== event.target.textContent
+      ) {
+        i++;
+        timeLeft -= 10;
+        questions();
+        checkAnswer.style.display = "";
+        checkAnswer.children[1].textContent = "Wrong!";
+        showAnswer();
+      }
+    });
+    // Show if answer is correct
+function showAnswer() {
+    var answerInterval = setInterval(function () {
+      clearInterval(answerInterval);
+      checkAnswer.children[1].textContent = "";
+      checkAnswer.style.display = "none";
+    }, 1000);
+  }
+  }
         // After running out questions or running out of time, input user score, put into localstorage
-    function submitInitials() {
+    function nameInput() {
         var storedValue = JSON.parse(localStorage.getItem("history"));
         if (storedValue !== null) {
         scoreHistoryArray = storedValue;
@@ -132,13 +166,56 @@ question1 = {
         localStorage.setItem("history", JSON.stringify(scoreHistory));
         highscore();
     });
+    }
+  // Read score history from localstorage
+    function highscore() {
+        homepage.style.display = "none";
+        enterInitials.style.display = "none";
+        highscoreBox.style.display = "";
+  
+    for (var j = 0; j < scoreHistory.length; j++) {
+        var li = document.createElement("li");
+        li.textContent = scoreHistory[j];
+        highscoreList.appendChild(li);
+    }
   }
+  // access score history when viewing highscores
+    function checkScoreHistory() {
+        questionBox.style.display = "none";
+        homepage.style.display = "none";
+        enterInitials.style.display = "none";
+        highscoreBox.style.display = "";
+        highscoreList.innerHTML = "";
+    var storedValue = JSON.parse(localStorage.getItem("history"));
+        if (storedValue !== null) {
+      scoreHistory= storedValue;
+    }
+    for (var j = 0; j < scoreHistory.length; j++) {
+      var li = document.createElement("li");
+      li.textContent = scoreHistory[j];
+      highscoreList.appendChild(li);
+    }
+  }
+  // Clear localstorage
+    function clearScores() {
+        localStorage.removeItem("history");
+        highscoreList.innerHTML = "";
+        scoreHistory = [];
+  }
+  // Return to homepage
+    function returnHome() {
+        timeLeft = 100;
+        i = 0;
+        highscoreList.innerHTML = "";
+        homepage.style.display = "";
+        highscoreBox.style.display = "none";
     }
 
 
 // add event listeners 
-beginQuiz.addEventListener("click", beginQuiz);
+begin.addEventListener("click", beginQuiz);
 returnHome.addEventListener("click", returnHome);
-viewScores.addEventListener("click", viewScores);
-clearHistory.addEventListener("click", clearLocalStorage);
+highscoreButton.addEventListener("click", checkScoreHistory);
+clearScores.addEventListener("click", clearScores);
+
 
