@@ -1,22 +1,22 @@
 
   //DEPENDENCIES
-var beginQuiz = document.querySelector(".beginQuiz");
+var beginQuizButton = document.querySelector(".beginQuiz");
 var homepage = document.querySelector(".homepage");
 var main = document.querySelector("main");
 var questionBox = document.querySelector(".questions");
 var timerEl = document.querySelector(".timer");
-var displayAnswers = document.querySelector("#answer");
-var enterInitials = document.querySelector("#enter-initials");
+var checkAnswer = document.querySelector("#checkAnswer");
+var nameInput = document.querySelector("#enterInitials");
 var submitInitials = document.querySelector("#submit");
 var warningMessage = document.querySelector("#warningMessage");
 var highscore = document.querySelector(".highscore");
-var highscoreList = document.querySelector(".highscoreList");
+var highscoreBox = document.querySelector(".highscoreList");
 var li = document.createElement("li");
-var clearHighscore = document.querySelector("#clearHighscore");
+var clearHighscore = document.querySelector("#clearScores");
 var returnHome = document.querySelector("#returnHome");
-var highscoreButton = document.querySelector(".highscoreButton");
+var highscoreButton = document.querySelector(".highscoreBtn");
 
-var timeRemaining = 60;
+var timeLeft = 60;
 var i = 0;
 var scoreHistory = [];
 
@@ -59,6 +59,7 @@ var question1 = {
   
     // once begin button is pressed, the timer is triggered as well
     function beginQuiz() {
+      console.log ("hey begin quiz")
         var timeInterval = setInterval(function () {
           timeLeft--;
           timerEl.textContent = timeLeft + "s left";
@@ -77,7 +78,7 @@ var question1 = {
     function questions() {
         if (i < questionDisplay.length) {
           generateQuestion();
-          checkIfCorrect();
+          checkAnswers();
         } else {
           return;
         }
@@ -121,7 +122,7 @@ function checkAnswers() {
         i++;
         questions();
         checkAnswer.style.display = "";
-        checkAnswer.children[1].textContent = "Correct!";
+        checkAnswer.textContent = "Correct!";
         showAnswer();
       } else if (
         event.target.matches("button") &&
@@ -131,7 +132,7 @@ function checkAnswers() {
         timeLeft -= 10;
         questions();
         checkAnswer.style.display = "";
-        checkAnswer.children[1].textContent = "Wrong!";
+        checkAnswer.textContent = "Wrong!";
         showAnswer();
       }
     });
@@ -139,7 +140,7 @@ function checkAnswers() {
 function showAnswer() {
     var answerInterval = setInterval(function () {
       clearInterval(answerInterval);
-      checkAnswer.children[1].textContent = "";
+      checkAnswer.textContent = "";
       checkAnswer.style.display = "none";
     }, 1000);
   }
@@ -152,8 +153,8 @@ function showAnswer() {
         }
         questionBox.style.display = "none";
         highscoreBox.style.display = "none";
-        enterInitials.style.display = "";
-        enterInitials.children[1].textContent = "Your final score is " + timeLeft;
+        nameInput.style.display = "";
+        nameInput.children[1].textContent = "Your final score is " + timeLeft;
         submitInitials.addEventListener("click", function (event) {
         event.stopImmediatePropagation();
         var userInitials = document.querySelector("#input-initial").value.trim();
@@ -170,7 +171,7 @@ function showAnswer() {
   // Read score history from localstorage
     function highscore() {
         homepage.style.display = "none";
-        enterInitials.style.display = "none";
+        nameInput.style.display = "none";
         highscoreBox.style.display = "";
   
     for (var j = 0; j < scoreHistory.length; j++) {
@@ -183,7 +184,7 @@ function showAnswer() {
     function checkScoreHistory() {
         questionBox.style.display = "none";
         homepage.style.display = "none";
-        enterInitials.style.display = "none";
+        nameInput.style.display = "none";
         highscoreBox.style.display = "";
         highscoreList.innerHTML = "";
     var storedValue = JSON.parse(localStorage.getItem("history"));
@@ -197,7 +198,7 @@ function showAnswer() {
     }
   }
   // Clear localstorage
-    function clearScores() {
+    function clearHighscores() {
         localStorage.removeItem("history");
         highscoreList.innerHTML = "";
         scoreHistory = [];
@@ -213,9 +214,9 @@ function showAnswer() {
 
 
 // add event listeners 
-begin.addEventListener("click", beginQuiz);
+beginQuizButton.addEventListener("click", beginQuiz);
 returnHome.addEventListener("click", returnHome);
 highscoreButton.addEventListener("click", checkScoreHistory);
-clearScores.addEventListener("click", clearScores);
+clearScores.addEventListener("click", clearHighscores);
 
 
